@@ -1,0 +1,24 @@
+syntax = "proto3";
+
+package recommend;
+
+service RecommendController {
+    rpc GetRecommendPostsId (GetRecommendPostsIdInput) returns (GetRecommendPostsIdResult) {};
+}
+
+// 调用接口的结果，success为false时应有reason
+message Result {
+     bool success = 1;
+    string reason =2;
+}
+
+message GetRecommendPostsIdInput {
+     int32 userId = 1; // 获取推荐动态的用户ID，必要字段
+     int32 offset = 2; // 偏移量，必要字段
+     int32 number = 3; // 获取动态数量，必要字段
+}
+
+message GetRecommendPostsIdResult {
+     Result result = 1;
+    repeated int32 postIdList = 2;
+}
